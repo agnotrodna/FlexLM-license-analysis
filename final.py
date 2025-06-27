@@ -8,11 +8,10 @@ appdatafile = '%s\\FlexLM License Analyst\\' %  os.environ['APPDATA']
 if not os.path.exists(appdatafile):
     os.makedirs(appdatafile)
 
-
-
 file_path = '%slicense_report.txt' % appdatafile
 tabledatapath = '%stable_DATA.txt' % appdatafile
 vendor_in_file = '(NANOSOFT)'
+exceltable = 'output.xlsx'
 
 def cleaner(path_to_file):
     if os.path.exists(path_to_file):
@@ -22,6 +21,7 @@ def cleaner(path_to_file):
 
 cleaner(file_path)
 cleaner(tabledatapath)
+cleaner(exceltable)
 
 path_to_log = "C:\\Program Files (x86)\\Nanosoft\\Nanosoft License Server\\flex.log"
 ########################MAIN#################################
@@ -249,6 +249,8 @@ ui.calendarWidget.selectionChanged.connect(lambda: calendar_dataset(ui))
 ui.calendarWidget.hide()
 ui.labelCSOFT.hide()
 ui.labelNANA.show()
+ui.label.setText("VER. 1.2")
+
 
 def open_click():
     open_file = path_to_log
@@ -288,6 +290,7 @@ def vendor_change_nano():
 import openpyxl
 from openpyxl.utils import get_column_letter
 from openpyxl.styles import Font
+from tkinter import filedialog
 
 
 def txt_to_excel():
@@ -341,14 +344,30 @@ def txt_to_excel():
     if 'Sheet' in wb.sheetnames:
         wb.remove(wb['Sheet'])
 
-    # Сохраняем книгу
-    wb.save('output.xlsx')
-    print('Файл output.xlsx успешно создан.')
+    # Создаем окно tkinter для выбора места сохранения
+    root = tk.Tk()
+    root.withdraw()  # Скрываем основное окно
+
+    # Запрашиваем у пользователя место сохранения и имя файла
+    file_path = filedialog.asksaveasfilename(
+        defaultextension=".xlsx",
+        filetypes=[("Excel files", "*.xlsx"), ("All files", "*.*")],
+        title="Сохранить файл как"
+    )
+
+    # Если пользователь не отменил диалог
+    if file_path:
+        # Сохраняем книгу
+        wb.save(file_path)
+        print(f'Файл {file_path} успешно создан.')
+    else:
+        print('Сохранение отменено пользователем.')
 
 
-# Пример использования
+
 ui.action.triggered.connect(txt_to_excel)
 
+ui.graph.triggered.connect(samoe_glavnoe)
 
 ui.actionDark_theme.triggered.connect(vendor_change_csoft)
 
