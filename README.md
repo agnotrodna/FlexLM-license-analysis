@@ -32,7 +32,7 @@
 
 1. Клонируйте репозиторий:
    ```bash
-   git clone https://github.com/yourusername/FlexLM-license-analysis.git
+   git clone https://github.com/agnotrodna/FlexLM-license-analysis.git
 2. Установите все зависимости для Python (файл с зависимостями появится в будущих версиях)
    ```bash
    pip install -r requirements.txt
