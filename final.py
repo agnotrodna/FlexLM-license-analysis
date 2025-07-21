@@ -161,10 +161,14 @@ from main_window import *
 from subproc import *
 import tkinter as tk
 import sys
-
+from PyQt5.QtWidgets import QGraphicsBlurEffect
 
 tk_root = tk.Tk()
 tk_root.withdraw()
+
+blur_effect = QGraphicsBlurEffect()
+blur_effect.setBlurRadius(8)
+
 
 
 def calendar_dataset(self):
@@ -243,16 +247,269 @@ MainWindow = QtWidgets.QMainWindow()
 ui = Ui_MainWindow()
 ui.setupUi(MainWindow)
 MainWindow.show()
+ui.tableView.setStyleSheet("""
+    /* Основной стиль QTableView */
+    QTableView {
+        font-family: "Segoe UI", sans-serif;
+        font-size: 14px;
+        background-color: #F9F9F9;
+        color: #333;
+        gridline-color: #D0D0D0;
+        border: 1px solid #C0C0C0;
+        border-radius: 8px;
+        outline: 0px; /* Убирает пунктир при фокусе */
+    }
+
+    /* Альтернативный цвет для строк */
+    QTableView::item {
+        padding: 6px;
+        border-bottom: 1px solid #E0E0E0;
+    }
+
+    QTableView::item:selected {
+        background-color: #4A90E2;
+        color: black;
+    }
+
+    QTableView::item:hover {
+        background-color: #F0F8FF;
+    }
+
+    /* Заголовок таблицы */
+    QHeaderView::section {
+        background-color: #E0E0E0;
+        color: black;
+        font-weight: bold;
+        padding: 6px;
+        border: none;
+        border-right: 1px solid #C0C0C0;
+    }
+
+    QHeaderView::section:checked {
+        background-color: #4A90E2;
+        color: white;
+    }
+
+    /* Горизонтальный скроллбар */
+    QScrollBar:horizontal {
+        background: #F0F0F0;
+        height: 12px;
+        margin: 0px;
+    }
+
+    QScrollBar::handle:horizontal {
+        background: #C0C0C0;
+        min-width: 20px;
+        border-radius: 6px;
+    }
+
+    QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {
+        background: none;
+    }
+
+    QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
+        background: none;
+    }
+
+    /* Вертикальный скроллбар */
+    QScrollBar:vertical {
+        background: #F0F0F0;
+        width: 12px;
+        margin: 0px;
+    }
+
+    QScrollBar::handle:vertical {
+        background: #C0C0C0;
+        min-height: 20px;
+        border-radius: 6px;
+    }
+
+    QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+        background: none;
+    }
+
+    QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+        background: none;
+    }
+""")
+
+ui.graphicsView.setGraphicsEffect(blur_effect)
 
 # Динамически добавляем метод в ui
 ui.calendarWidget.selectionChanged.connect(lambda: calendar_dataset(ui))
 ui.calendarWidget.hide()
-ui.labelCSOFT.hide()
-ui.labelNANA.show()
-ui.label.setText("VER. 1.2")
+
+
+ui.label.setText("VER. 1.4")
 
 
 def open_click():
+    if vendor_in_file == '(NANOSOFT)':
+        ui.calendarWidget.setStyleSheet("""
+    /* Основной стиль календаря */
+    QCalendarWidget {
+        font-family: "Segoe UI", sans-serif;
+        font-size: 14px;
+        border: 2px solid #A0A0A0;
+        border-radius: 10px;
+        background-color: #F9F9F9;
+    }
+
+    /* Стиль заголовка */
+    QCalendarWidget QWidget#qt_calendar_navigationbar {
+        background-color: #4A90E2;
+        border-radius: 8px;
+        color: white;
+        font-weight: bold;
+    }
+
+    /* Кнопки переключения месяца */
+    QCalendarWidget QToolButton {
+        color: white;
+        font-size: 16px;
+        padding: 4px 8px;
+        margin: 2px;
+        border-radius: 6px;
+        background-color: transparent;
+    }
+
+    QCalendarWidget QToolButton:hover {
+        background-color: rgba(255, 255, 255, 30);
+    }
+
+    /* Выпадающий список месяцев и годов */
+    QCalendarWidget QMenu {
+        background-color: #FFFFFF;
+        border: 1px solid #C0C0C0;
+        border-radius: 6px;
+    }
+
+    QCalendarWidget QMenu::item {
+        padding: 4px 16px;
+    }
+
+    QCalendarWidget QMenu::item:selected {
+        background-color: #4A90E2;
+        color: white;
+    }
+
+    /* Таблица дней */
+    QCalendarWidget QTableView {
+        border: 4px solid #D0D0D0;
+        border-radius: 6px;
+        selection-background-color: #4A90E2;
+        selection-color: white;
+        font-size: 14px;
+    }
+
+    /* Дни недели */
+    QCalendarWidget QHeaderView::section {
+        background-color: #E0E0E0;
+        color: black;
+        font-weight: bold;
+        padding: 4px;
+        border: 4px solid #D0D0D0;
+        border-radius: 4px;
+    }
+
+    /* Сегодняшняя дата */
+    QCalendarWidget QDateEdit {
+        background-color: #FFF3CD;
+        color: #333;
+        border: 3px solid #CCC;
+        border-radius: 6px;
+    }
+
+    /* Выбранный день */
+    QCalendarWidget QAbstractItemView:enabled {
+        selection-background-color: #4A90E2;
+        selection-color: white;
+    }
+""")
+
+    if vendor_in_file == '(CSOFT)':
+     ui.calendarWidget.setStyleSheet("""
+    /* Основной стиль календаря */
+    QCalendarWidget {
+        font-family: "Segoe UI", sans-serif;
+        font-size: 14px;
+        border: 2px solid #A0A0A0;
+        border-radius: 10px;
+        background-color: #F9F9F9;
+    }
+
+    /* Стиль заголовка */
+    QCalendarWidget QWidget#qt_calendar_navigationbar {
+        background-color: #cd5c5c;
+        border-radius: 8px;
+        color: white;
+        font-weight: bold;
+    }
+
+    /* Кнопки переключения месяца */
+    QCalendarWidget QToolButton {
+        color: white;
+        font-size: 16px;
+        padding: 4px 8px;
+        margin: 2px;
+        border-radius: 6px;
+        background-color: transparent;
+    }
+
+    QCalendarWidget QToolButton:hover {
+        background-color: rgba(255, 255, 255, 30);
+    }
+
+    /* Выпадающий список месяцев и годов */
+    QCalendarWidget QMenu {
+        background-color: #FFFFFF;
+        border: 1px solid #C0C0C0;
+        border-radius: 6px;
+    }
+
+    QCalendarWidget QMenu::item {
+        padding: 4px 16px;
+    }
+
+    QCalendarWidget QMenu::item:selected {
+        background-color: #cd5c5c;
+        color: white;
+    }
+
+    /* Таблица дней */
+    QCalendarWidget QTableView {
+        border: 4px solid #D0D0D0;
+        border-radius: 6px;
+        selection-background-color: #cd5c5c;
+        selection-color: white;
+        font-size: 14px;
+    }
+
+    /* Дни недели */
+    QCalendarWidget QHeaderView::section {
+        background-color: #E0E0E0;
+        color: black;
+        font-weight: bold;
+        padding: 4px;
+        border: 4px solid #D0D0D0;
+        border-radius: 4px;
+    }
+
+    /* Сегодняшняя дата */
+    QCalendarWidget QDateEdit {
+        background-color: #cd5c5c;
+        color: #333;
+        border: 3px solid #CCC;
+        border-radius: 6px;
+    }
+
+    /* Выбранный день */
+    QCalendarWidget QAbstractItemView:enabled {
+        selection-background-color: #cd5c5c;
+        selection-color: white;
+    }
+""")
+     
     open_file = path_to_log
     if open_file:
         main(open_file)
@@ -273,8 +530,9 @@ def vendor_change_csoft():
     path_to_log = "C:\\Program Files (x86)\\CSoft\\CS License Server\\flex.log"
     ui.graphicsView.setStyleSheet("background-color: rgb(237, 28, 36);")
     vendor_in_file = '(CSOFT)'
-    ui.labelNANA.hide()
-    ui.labelCSOFT.show()
+   
+
+
 
 
 def vendor_change_nano():
@@ -282,8 +540,7 @@ def vendor_change_nano():
     path_to_log = "C:\\Program Files (x86)\\Nanosoft\\Nanosoft License Server\\flex.log"
     ui.graphicsView.setStyleSheet("background-color: rgb(0, 172, 226);")
     vendor_in_file = '(NANOSOFT)'
-    ui.labelCSOFT.hide()
-    ui.labelNANA.show()
+
 
 
 ########################EXPORT2EXCEL######################################################
@@ -369,8 +626,8 @@ ui.action.triggered.connect(txt_to_excel)
 
 ui.graph.triggered.connect(samoe_glavnoe)
 
-ui.actionDark_theme.triggered.connect(vendor_change_csoft)
+ui.pushButton.clicked.connect(vendor_change_csoft)
 
-ui.actionLight_theme.triggered.connect(vendor_change_nano)
+ui.pushButton_2.clicked.connect(vendor_change_nano)
 
 sys.exit(app.exec_())

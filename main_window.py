@@ -24,7 +24,7 @@ class Ui_MainWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.horizontalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(10, 10, 1371, 821))
+        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(10, 10, 1371, 841))
         self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
@@ -39,7 +39,7 @@ class Ui_MainWindow(object):
         self.tableView.setObjectName("tableView")
         self.horizontalLayout.addWidget(self.tableView)
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(1380, 10, 371, 821))
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(1380, 10, 371, 841))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -49,24 +49,50 @@ class Ui_MainWindow(object):
         self.calendarWidget.setGridVisible(True)
         self.calendarWidget.setObjectName("calendarWidget")
         self.verticalLayout.addWidget(self.calendarWidget)
+        self.pushButton_2 = QtWidgets.QPushButton(self.verticalLayoutWidget)
+        font = QtGui.QFont()
+        font.setPointSize(-1)
+        self.pushButton_2.setFont(font)
+        self.pushButton_2.setStyleSheet("QPushButton {\n"
+"    background-color: #ffffff;\n"
+"    border: 2px solid #0077b5;\n"
+"    border-radius: 0.4em;\n"
+"    font-size: 17px;\n"
+"    padding: 4px;\n"
+"    color: #0077b5;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: #0077b5;\n"
+"    color: white;\n"
+"}")
+        self.pushButton_2.setObjectName("pushButton_2")
+        self.verticalLayout.addWidget(self.pushButton_2)
+        self.pushButton = QtWidgets.QPushButton(self.verticalLayoutWidget)
+        font = QtGui.QFont()
+        font.setPointSize(-1)
+        self.pushButton.setFont(font)
+        self.pushButton.setStyleSheet("QPushButton {\n"
+"    background-color: #ffffff;\n"
+"    border: 2px solid #cd5c5c;\n"
+"    border-radius: 0.4em;\n"
+"    font-size: 17px;\n"
+"    padding: 4px;\n"
+"    color: #cd5c5c ;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: #cd5c5c ;\n"
+"    color: white;\n"
+"}")
+        self.pushButton.setObjectName("pushButton")
+        self.verticalLayout.addWidget(self.pushButton)
         self.graphicsView = QtWidgets.QGraphicsView(self.centralwidget)
-        self.graphicsView.setGeometry(QtCore.QRect(10, 830, 1741, 41))
+        self.graphicsView.setGeometry(QtCore.QRect(-40, 860, 1871, 20))
         self.graphicsView.setStyleSheet("background-color: rgb(0, 172, 226);")
         self.graphicsView.setObjectName("graphicsView")
-        self.labelNANA = QtWidgets.QLabel(self.centralwidget)
-        self.labelNANA.setGeometry(QtCore.QRect(850, 830, 81, 41))
-        self.labelNANA.setText("")
-        self.labelNANA.setPixmap(QtGui.QPixmap("../../Downloads/vg0px7l3ojr37vlu73gw1qzg8rqvclyz.jpg"))
-        self.labelNANA.setScaledContents(True)
-        self.labelNANA.setObjectName("labelNANA")
-        self.labelCSOFT = QtWidgets.QLabel(self.centralwidget)
-        self.labelCSOFT.setGeometry(QtCore.QRect(850, 830, 81, 41))
-        self.labelCSOFT.setText("")
-        self.labelCSOFT.setPixmap(QtGui.QPixmap("../../Downloads/CSOFT.png"))
-        self.labelCSOFT.setScaledContents(True)
-        self.labelCSOFT.setObjectName("labelCSOFT")
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(1680, 840, 61, 20))
+        self.label.setGeometry(QtCore.QRect(1680, 850, 61, 20))
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(10)
@@ -84,8 +110,6 @@ class Ui_MainWindow(object):
         self.menubar.setObjectName("menubar")
         self.menuOpen = QtWidgets.QMenu(self.menubar)
         self.menuOpen.setObjectName("menuOpen")
-        self.menuOptions = QtWidgets.QMenu(self.menubar)
-        self.menuOptions.setObjectName("menuOptions")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -109,10 +133,7 @@ class Ui_MainWindow(object):
         self.menuOpen.addAction(self.action)
         self.menuOpen.addAction(self.graph)
         self.menuOpen.addAction(self.actionClose)
-        self.menuOptions.addAction(self.actionLight_theme)
-        self.menuOptions.addAction(self.actionDark_theme)
         self.menubar.addAction(self.menuOpen.menuAction())
-        self.menubar.addAction(self.menuOptions.menuAction())
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -120,14 +141,13 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "FlexLM License Analyst"))
+        self.pushButton_2.setText(_translate("MainWindow", "NanoSoft"))
+        self.pushButton.setText(_translate("MainWindow", "CSoft"))
         self.label.setText(_translate("MainWindow", "VER. 1.1"))
         self.menuOpen.setTitle(_translate("MainWindow", "Файл"))
-        self.menuOptions.setTitle(_translate("MainWindow", "Вендор"))
         self.actionSave.setText(_translate("MainWindow", "Save"))
         self.actionClose.setText(_translate("MainWindow", "Закрыть приложение"))
         self.actionOpen.setText(_translate("MainWindow", "Подгрузить файл"))
-        self.actionLight_theme.setText(_translate("MainWindow", "Nanosoft"))
-        self.actionDark_theme.setText(_translate("MainWindow", "CSoft"))
         self.action.setText(_translate("MainWindow", "Сформировать отчет"))
         self.graph.setText(_translate("MainWindow", "Отобразить график"))
 
